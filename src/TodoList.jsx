@@ -25,8 +25,14 @@ function TodoList(){
         }
     }
 
-    const handleFix = () =>{
-
+    const handleFix = (work) =>{
+        if(list.includes(work)){
+            const text = prompt("Change value");
+            console.log(text);
+            const index = list.findIndex(num => num === work);
+            list.splice(index, 1, text);
+             setList([...list]);
+        }
     }
 
     return (
@@ -44,7 +50,7 @@ function TodoList(){
                     <div key = {index}> 
                         <li>{work}</li>
                         <button onClick = {() => handleDelete(work)}>Delete</button>
-                        <button onClick = {() => handleFix()}>Fix</button>
+                        <button onClick = {() => handleFix(work)}>Fix</button>
                     </div>
                     )
                 })
