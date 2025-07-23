@@ -1,29 +1,26 @@
-import { useState } from 'react';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 function App() {
-  const [selectedIds,setSelectedIds] = useState([]);
+  const [selectedIds, setSelectedIds] = useState([]);
 
-  const handleCheckbox = (course) =>{
-
-    if(selectedIds.includes(course)){
-      setSelectedIds(selectedIds.filter(index => index !== course));
+  const handleCheckbox = (course) => {
+    if (selectedIds.includes(course)) {
+      setSelectedIds(selectedIds.filter((index) => index !== course));
+    } else {
+      setSelectedIds([...selectedIds, course]);
     }
-    else{
-      setSelectedIds([...selectedIds,course]);
-    }
-  }
-  
+  };
 
-  const [click, setClick] = useState()
+  const [click, setClick] = useState();
 
   const handleRadio = (course) => {
     setClick(course);
-  }
-  console.log(click)
+  };
+  console.log(click);
   const courses = [
-    { id: 1, name: 'HTML, CSS' },
-    { id: 2, name: 'Javascript' },
-    { id: 3, name: 'ReactJS' }
+    { id: 1, name: "HTML, CSS" },
+    { id: 2, name: "Javascript" },
+    { id: 3, name: "ReactJS" },
   ];
 
   return (
@@ -40,16 +37,16 @@ function App() {
         </label>
       ))}
       <br></br>
-      {courses.map(course => (
+      {courses.map((course) => (
         <label key={course.id}>
-
-          <input type="radio"
-           value={course.id}
-           onChange={() =>handleRadio(course.id)}
-           checked={click === course.id}
-           />
+          <input
+            type="radio"
+            value={course.id}
+            onChange={() => handleRadio(course.id)}
+            checked={click === course.id}
+          />
           {course.name}
-        </label>  
+        </label>
       ))}
     </>
   );
