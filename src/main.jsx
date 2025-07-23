@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import UseE from "./useEffect.jsx";
+import Timer from "./useETimer";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <UseE></UseE>
+    <Timer></Timer>
   </StrictMode>
 );
