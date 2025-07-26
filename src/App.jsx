@@ -5,11 +5,12 @@ function App() {
   const { todos, todoInput } = state;
 
   const handleAdd = () => {
-    console.log(todoInput);
-    console.log(todos);
     dispatch(actions.addTodo(todoInput));
   };
 
+  const handleDelete = () => {
+    dispatch(actions.deteleTodo());
+  };
   return (
     <div>
       <input
@@ -24,7 +25,11 @@ function App() {
 
       <ul>
         {todos.map((todo, index) => {
-          return <li key={index}>{todo}</li>;
+          return (
+            <li key={index}>
+              {todo} <span onclick={handleDelete}>&times;</span>
+            </li>
+          );
         })}
       </ul>
     </div>
