@@ -1,54 +1,33 @@
-import { useState } from "react";
-import "./App.css";
+import { useStore, actions } from "./store";
+
 function App() {
-  const [selectedIds, setSelectedIds] = useState([]);
+  const [state, dispatch] = useStore();
+  const { todos, todoInput } = state;
 
-  const handleCheckbox = (course) => {
-    if (selectedIds.includes(course)) {
-      setSelectedIds(selectedIds.filter((index) => index !== course));
-    } else {
-      setSelectedIds([...selectedIds, course]);
-    }
+  const handleAdd = () => {
+    console.log(todoInput);
+    console.log(todos);
+    dispatch(actions.addTodo(todoInput));
   };
-
-  const [click, setClick] = useState();
-
-  const handleRadio = (course) => {
-    setClick(course);
-  };
-  console.log(click);
-  const courses = [
-    { id: 1, name: "HTML, CSS" },
-    { id: 2, name: "Javascript" },
-    { id: 3, name: "ReactJS" },
-  ];
 
   return (
-    <>
-      {courses.map((course) => (
-        <label key={course.id}>
-          <input
-            type="checkbox"
-            value={course.id}
-            checked={selectedIds.includes(course.id)}
-            onChange={() => handleCheckbox(course.id)}
-          />
-          {course.name}
-        </label>
-      ))}
-      <br></br>
-      {courses.map((course) => (
-        <label key={course.id}>
-          <input
-            type="radio"
-            value={course.id}
-            onChange={() => handleRadio(course.id)}
-            checked={click === course.id}
-          />
-          {course.name}
-        </label>
-      ))}
-    </>
+    <div>
+      <input
+        state={todoInput}
+        placeholder="Enter todo..."
+        onChange={(e) => {
+          dispatch(actions.setTodoInput(e.target.value));
+        }}
+      />
+
+      <button onClick={handleAdd}> Add</button>
+
+      <ul>
+        {todos.map((todo, index) => {
+          return <li key={index}>{todo}</li>;
+        })}
+      </ul>
+    </div>
   );
 }
 
