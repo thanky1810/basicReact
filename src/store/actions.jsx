@@ -1,4 +1,4 @@
-import { SET_TODO_INPUT, ADD_TODO, DELETE_TODO } from "./constants";
+import { SET_TODO_INPUT, ADD_TODO, DELETE_TODO, FIX_TODO } from "./constants";
 
 export const setTodoInput = (payload) => ({
   type: SET_TODO_INPUT,
@@ -12,5 +12,10 @@ export const addTodo = (payload) => ({
 
 export const deteleTodo = (payload) => ({
   type: DELETE_TODO,
+  payload,
+});
+
+export const fixTodo = (payload) => ({
+  type: FIX_TODO,
   payload,
 });

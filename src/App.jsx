@@ -8,9 +8,15 @@ function App() {
     dispatch(actions.addTodo(todoInput));
   };
 
-  const handleDelete = () => {
-    dispatch(actions.deteleTodo());
+  const handleDelete = (index) => {
+    dispatch(actions.deteleTodo(index));
   };
+
+  const handleFix = (index) => {
+    const value = prompt("Enter value to change");
+    dispatch(actions.fixTodo({ index, value }));
+  };
+
   return (
     <div>
       <input
@@ -27,7 +33,8 @@ function App() {
         {todos.map((todo, index) => {
           return (
             <li key={index}>
-              {todo} <span onclick={handleDelete}>&times;</span>
+              {todo} <span onclick={handleDelete(index)}>&times;</span>
+              <button onClick={() => handleFix()}>fix</button>
             </li>
           );
         })}

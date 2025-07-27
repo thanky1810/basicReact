@@ -20,7 +20,7 @@ function reducer(state, action) {
     case DELETE_TODO:
       return {
         ...state,
-        todos: state.jobs.filter((_, index) => index !== action.payload),
+        todos: state.todos.filter((_, index) => index !== action.payload),
       };
     default:
       throw new Error("Invalid action");
