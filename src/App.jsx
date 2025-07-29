@@ -1,11 +1,15 @@
+import { useRef } from "react";
 import { useStore, actions } from "./store";
 
 function App() {
   const [state, dispatch] = useStore();
-  const { todos, todoInput } = state;
+  var { todos, todoInput } = state;
+  const inputRef = useRef();
 
   const handleAdd = () => {
     dispatch(actions.addTodo(todoInput));
+    inputRef.current.focus();
+    inputRef.current.value = "";
   };
 
   const handleDelete = (index) => {
@@ -14,12 +18,14 @@ function App() {
 
   const handleFix = (index) => {
     const value = prompt("Enter value to change");
+    console.log(index);
     dispatch(actions.fixTodo({ index, value }));
   };
 
   return (
     <div>
       <input
+        ref={inputRef}
         state={todoInput}
         placeholder="Enter todo..."
         onChange={(e) => {
@@ -33,8 +39,8 @@ function App() {
         {todos.map((todo, index) => {
           return (
             <li key={index}>
-              {todo} <span onclick={handleDelete(index)}>&times;</span>
-              <button onClick={() => handleFix()}>fix</button>
+              {todo} <span onClick={() => handleDelete(index)}>&times;</span>
+              <button onClick={() => handleFix(index)}>fix</button>
             </li>
           );
         })}

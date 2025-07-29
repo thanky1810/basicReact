@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO, SET_TODO_INPUT } from "./constants";
+import { ADD_TODO, DELETE_TODO, SET_TODO_INPUT, FIX_TODO } from "./constants";
 
 const initState = {
   todos: [],
@@ -21,6 +21,13 @@ function reducer(state, action) {
       return {
         ...state,
         todos: state.todos.filter((_, index) => index !== action.payload),
+      };
+    case FIX_TODO:
+      const updateList = state.todos;
+      updateList[action.payload.index] = action.payload.value;
+      return {
+        ...state,
+        todos: updateList,
       };
     default:
       throw new Error("Invalid action");
